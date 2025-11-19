@@ -5,7 +5,7 @@ import { auth } from '../../firebaseConfig'
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth'
 import { router } from 'expo-router'
 
-    const Index = () => {
+    const LoginScreen = () => {
         const [email,setEmail] = useState('');
         const [password,setPassword ] = useState('');
         
@@ -28,6 +28,10 @@ import { router } from 'expo-router'
                 alert('SignUp failed: '+error.message);
                 }
         }
+        
+        const navigateToMap = () => {
+            router.replace('/(tabs)/index');
+        }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -41,11 +45,17 @@ import { router } from 'expo-router'
             <TouchableOpacity style={styles.button} onPress={signUp}>
                 <Text style={styles.text}>Make Account</Text>
             </TouchableOpacity>
+            <View style={styles.guestContainer}>
+                <Text style={styles.guestPromptText}>or</Text>
+                <TouchableOpacity onPress={navigateToMap}>
+                    <Text style={styles.guestLinkText}>View the map as a guest</Text>
+                </TouchableOpacity>
+            </View>
 
         </SafeAreaView>
     )
 }
-export default Index
+export default LoginScreen
 
 
 const styles = StyleSheet.create({
@@ -96,5 +106,22 @@ const styles = StyleSheet.create({
     color: '#FFFFFF', // Maintained white for clear visibility
     fontSize: 18, // Slightly larger for emphasis
     fontWeight: '600', // Semi-bold for a balanced weight
+  },
+  guestContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  guestPromptText: {
+    fontSize: 16,
+    color: '#757575', // A neutral gray color
+    marginRight: 5,
+  },
+  guestLinkText: {
+    color: '#5C6BC0', // Use the primary color for the text
+    fontSize: 16,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
   }
 });
