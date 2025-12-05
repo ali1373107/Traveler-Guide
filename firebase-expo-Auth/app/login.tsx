@@ -23,6 +23,7 @@ import { router } from 'expo-router'
             try {
                 const user = await createUserWithEmailAndPassword(auth,email,password)
                 if(user) router.replace('/(tabs)/index');
+                console.log("user")
                 } catch (error:any) {
                 console.log(error.message)
                 alert('SignUp failed: '+error.message);
